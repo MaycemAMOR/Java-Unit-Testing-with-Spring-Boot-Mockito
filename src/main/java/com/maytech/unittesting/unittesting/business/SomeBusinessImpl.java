@@ -4,6 +4,12 @@ import java.util.Arrays;
 
 public class SomeBusinessImpl {
 
+    private final SomeDataService someDataService;
+
+    public SomeBusinessImpl(SomeDataService someDataService) {
+        this.someDataService = someDataService;
+    }
+
     public int calculateSum(int[] data) {
         System.out.println("Calculate Sum Of an Integer array ");
 
@@ -29,5 +35,15 @@ public class SomeBusinessImpl {
         //sumInt += dataValue;
         //}
         //return sumInt;
+    }
+
+
+    public int calculateSumUsingDataService() {
+        System.out.println("Calculate Sum Of an Integer array ");
+        int[] data = someDataService.retrieveAllData();
+        /*****  V2 With Reduce and Method reference Functional Programming *****/
+        System.out.println("V2 With Reduce and Method reference Functional Programming");
+        return Arrays.stream(data).reduce(0, Integer::sum);
+
     }
 }
