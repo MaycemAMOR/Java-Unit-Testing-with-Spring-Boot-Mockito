@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class SomeBusinessImpl {
 
-    private final SomeDataService someDataService;
+    private SomeDataService someDataService;
 
-    public SomeBusinessImpl(SomeDataService someDataService) {
+    public void setSomeDataService(SomeDataService someDataService) {
         this.someDataService = someDataService;
     }
 
