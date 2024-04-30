@@ -21,6 +21,7 @@ public class SomeBusinessImpl {
 
         /*****  V2 With Reduce and Method reference Functional Programming *****/
         System.out.println("V2 With Reduce and Method reference Functional Programming");
+        System.out.println(Arrays.stream(data).reduce(0, Integer::sum));
         return Arrays.stream(data).reduce(0, Integer::sum);
 
         /*****  V3 With sum Functional Programming *****/
@@ -43,6 +44,7 @@ public class SomeBusinessImpl {
         int[] data = someDataService.retrieveAllData();
         /*****  V2 With Reduce and Method reference Functional Programming *****/
         System.out.println("V2 With Reduce and Method reference Functional Programming");
+        System.out.println(Arrays.stream(data).reduce(0, Integer::sum));
         return Arrays.stream(data).reduce(0, Integer::sum);
 
     }
