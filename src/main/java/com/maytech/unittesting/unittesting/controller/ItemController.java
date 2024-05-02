@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemController {
 
     @GetMapping("/maycem-item")
-    Item amorItem() {
+    Item maycemItem() {
         return new Item(1, "Ball", 10, 100);
     }
 }
