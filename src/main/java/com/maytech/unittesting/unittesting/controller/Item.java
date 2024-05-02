@@ -1,11 +1,20 @@
 package com.maytech.unittesting.unittesting.controller;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Item {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private int price;
     private int quantity;
+
+    @Transient   // pour que cet attribut ne soit pas stocké dans la bdd
+    private int value;
+
 
     public Item() {
     }
@@ -15,6 +24,14 @@ public class Item {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public int getId() {
