@@ -1,6 +1,7 @@
 package com.maytech.unittesting.unittesting.business;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
@@ -46,7 +47,6 @@ public class ListMockTest {
         String value1 = list.get(0);
         String value2 = list.get(1);
 
-
         //Verify
         verify(list).get(0);
         verify(list, times(2)).get(anyInt());
@@ -54,6 +54,19 @@ public class ListMockTest {
         verify(list, atLeastOnce()).get(anyInt());
         verify(list, atMost(2)).get(anyInt());
         verify(list, never()).get(2);
+
+    }
+
+    @Test
+    void argumentCapturing() {
+        //SUT
+        list.add("SomeString");
+
+        //Verify
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(list).add(captor.capture());
+
+        assertEquals("SomeString", captor.getValue());
 
     }
 }
