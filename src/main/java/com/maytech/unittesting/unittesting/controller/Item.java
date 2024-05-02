@@ -16,7 +16,7 @@ public class Item {
     private int value;
 
 
-    public Item() {
+    protected Item() {
     }
 
     public Item(int id, String name, int price, int quantity) {

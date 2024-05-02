@@ -1,5 +1,6 @@
 package com.maytech.unittesting.unittesting.business;
 
+import com.maytech.unittesting.unittesting.data.SomeDataService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,11 +14,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SomeBusinessMockTest {
 
-   @InjectMocks
+    @InjectMocks
     SomeBusinessImpl business;
 
-   @Mock
-   SomeDataService dataServiceMock;
+    @Mock
+    SomeDataService dataServiceMock;
 
 
     @Test

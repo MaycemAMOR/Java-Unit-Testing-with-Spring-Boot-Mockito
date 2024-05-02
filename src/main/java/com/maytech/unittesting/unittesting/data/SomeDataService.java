@@ -1,4 +1,4 @@
-package com.maytech.unittesting.unittesting.business;
+package com.maytech.unittesting.unittesting.data;
 
 public interface SomeDataService {
     int[] retrieveAllData();

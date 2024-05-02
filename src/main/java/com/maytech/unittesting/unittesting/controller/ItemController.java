@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ItemController {
 
     @Autowired
-    private ItemBusinessService itemBusinessService;
+    private ItemBusinessService businessService;
 
     @GetMapping("/maycem-item")
     Item maycemItem() {
@@ -18,6 +20,13 @@ public class ItemController {
 
     @GetMapping("/item-from-business-service")
     Item itemFromBusinessService() {
-        return itemBusinessService.retrieveHardCodedItem();
+        return businessService.retrieveHardCodedItem();
+    }
+
+    @GetMapping("/all-items-from-database")
+    List<Item> retrieveAllItem() {
+        List<Item> items = businessService.retrieveAllItem();
+        items.forEach(item -> item.setValue(item.getPrice() * item.getQuantity()));
+        return items;
     }
 }
