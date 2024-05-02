@@ -1,4 +1,4 @@
-package com.maytech.unittesting.unittesting;
+package com.maytech.unittesting.unittesting.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 
     @GetMapping("/hello-world")
-    String helloWorld(){
+    String helloWorld() {
         return "Hello World";
     }
 }
