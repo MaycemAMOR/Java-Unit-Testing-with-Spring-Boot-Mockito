@@ -13,9 +13,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ItemController.class)
 public class ItemControllerTest {
@@ -57,7 +59,6 @@ public class ItemControllerTest {
                 .andReturn();
     }
 
-
     @Test
     void retrieveAllItem_basic() throws Exception {
 
@@ -75,6 +76,31 @@ public class ItemControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{id:2, name:Item2, price:10},{id:3, name:Item3, price:30}]"))
                 .andReturn();
+    }
+
+    @Test
+    void createItem_basic() throws Exception {
+
+        // Create a sample saved item returned by the business service
+        Item savedItem = new Item(1, "Item0", 100, 100);
+
+        // Define the behavior of the mock business service
+        when(itemBusinessService.createItem(any(Item.class))).thenReturn(savedItem);
+
+        // Mock the request to create an item
+        // call post "/items"  application/json
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/items")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":1,\"name\":\"item0\",\"price\":100,\"quantity\":100}")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(header()
+                        .string("Location", containsString("/items/1")))
+                .andReturn();
+
+        // Verify that the business service's createItem method was called with any Item object
+        verify(itemBusinessService).createItem(any(Item.class));
     }
 
 }
